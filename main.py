@@ -10,7 +10,10 @@ def terminal():
     tabuleiro = novo_jogo()
     while True:
         if jogadas == 0:
-            os.system('cls')
+            if os.name == "nt":
+                os.system('cls')
+            else:
+                os.system("clear")
             print('Jogue com w a s d')
             print(f'jogadas: {jogadas}')
             print(f'pontos: {pontos[0]}')
@@ -21,7 +24,10 @@ def terminal():
                 aparecer_peca(tabuleiro)
         else:
             
-            os.system('cls')
+            if os.name == "nt":
+                os.system('cls')
+            else:
+                os.system("clear")
             print(f'jogadas: {jogadas}')
             print(f'pontos: {pontos[0]}')
             print_tabuleiro(tabuleiro)
