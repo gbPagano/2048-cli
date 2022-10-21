@@ -80,7 +80,7 @@ def print_tabuleiro(tabuleiro):
         else:
             print(" ├──────┼──────┼──────┼──────┤")
 
-
+# done
 def verificar_disponibilidade(t):
 
     disponiveis = []
@@ -94,7 +94,7 @@ def verificar_disponibilidade(t):
     else:
         return disponiveis
 
-
+#done
 def novo_jogo():
     global pontos
     pontos = 0
@@ -116,7 +116,7 @@ def novo_jogo():
 
     return tabuleiro
 
-
+#done
 def aparecer_peca(tabuleiro):
 
     disponiveis = verificar_disponibilidade(tabuleiro)
@@ -131,12 +131,11 @@ def aparecer_peca(tabuleiro):
 
     return False
 
-
+#done
 def jogada_player(t, jogada, pontos):
 
     if jogada == "s":
-        if not baixo(t, pontos):
-            return False
+        return baixo(t, pontos)
     elif jogada == "w":
         if not cima(t, pontos):
             return False
@@ -146,19 +145,15 @@ def jogada_player(t, jogada, pontos):
     elif jogada == "a":
         if not esquerda(t, pontos):
             return False
-    else:
-        return False
 
-    return True
-
-
+#done
 def esquerda(t, pontos):
 
     movimentou = movimento(t, pontos)
 
     return movimentou
 
-
+#done
 def direita(t, pontos):
 
     t = np.fliplr(t)
@@ -167,7 +162,7 @@ def direita(t, pontos):
 
     return movimentou
 
-
+#done
 def cima(t, pontos):
 
     t = np.rot90(t)
@@ -176,7 +171,7 @@ def cima(t, pontos):
 
     return movimentou
 
-
+#done
 def baixo(t, pontos):
 
     t = np.flip(t)
@@ -187,7 +182,7 @@ def baixo(t, pontos):
 
     return movimentou
 
-
+#done
 def verificar_final(t, pontos):
 
     if not verificar_disponibilidade(t):
@@ -207,7 +202,7 @@ def verificar_final(t, pontos):
 
     return True
 
-
+#done
 def movimento(t, pontos):
 
     movimentou = mover(t)
@@ -220,7 +215,7 @@ def movimento(t, pontos):
 
     return False
 
-
+#done
 def mover(t):
     movimentou = False
 
@@ -237,7 +232,7 @@ def mover(t):
 
     return movimentou
 
-
+#done
 def somar(t, pontos):
 
     movimentou = False
