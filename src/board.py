@@ -77,23 +77,22 @@ class Board:
                     empty_positions.append([i, j])
 
         if empty_positions:
-            print(empty_positions)
             return False
-        else:
-            for i in range(0, 3, 2):
-                for j in range(0, 3, 2):
-                    if j+1 < 4:
-                        if self.board[i][j] == self.board[i][j+1]:
-                            return False
-                    if j-1 >= 0:
-                        if self.board[i][j] == self.board[i][j-1]:
-                            return False
-                    if i+1 < 4:
-                        if self.board[i][j] == self.board[i+1][j]:
-                            return False
-                    if i-1 >= 0:
-                        if self.board[i][j] == self.board[i-i][j]:
-                            return False
+        
+        for i in range(4):
+            for j in range(4):
+                if j+1 < 4:
+                    if self.board[i][j] == self.board[i][j+1]:
+                        return False
+                if j-1 >= 0:
+                    if self.board[i][j] == self.board[i][j-1]:
+                        return False
+                if i+1 < 4:
+                    if self.board[i][j] == self.board[i+1][j]:
+                        return False
+                if i-1 >= 0:
+                    if self.board[i][j] == self.board[i-1][j]:
+                        return False
 
         return True
 

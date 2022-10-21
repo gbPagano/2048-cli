@@ -13,12 +13,15 @@ def new_game():
     board = Board()
     print_tabuleiro(board.board)
     while True:
-        jogada = get_click()
+        # jogada = get_click()
+        import random
+        jogada = random.choice(["up", "down","right", "left"])
         if jogada and board.move(jogada):
             board.new_piece()
             print_tabuleiro(board.board)
         elif board.verify_end():
-            print("perder palhaço")
+            print("perdeu palhaço")
+            break
 
 
 
