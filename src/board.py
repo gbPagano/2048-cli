@@ -7,6 +7,7 @@ class Board:
 
     def new_game(self) -> None:
         self.score = 0
+        self.moves = 0
         self.board = np.array([
             [0, 0, 0, 0],
             [0, 0, 0, 0],
@@ -48,6 +49,8 @@ class Board:
         elif direction == "left": 
             has_moved = self._moving()
 
+        if has_moved:
+            self.moves += 1
 
         return has_moved
 

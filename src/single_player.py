@@ -1,4 +1,3 @@
-from re import S
 import click
 
 from rich.align import Align
@@ -13,7 +12,7 @@ from src.board import Board
 def new_game():
     board = Board()
 
-    group = print_board(board.board)
+    group = print_board(board.board, board.score, board.moves)
 
 
     with Live(group, auto_refresh=False, screen=True) as live:
@@ -22,35 +21,37 @@ def new_game():
             ...
             import random
             jogada = random.choice(["up", "down","right", "left"])
-            jogada = get_click()
+            # jogada = get_click()
             if jogada and board.move(jogada):
                 board.new_piece()
-                group = print_board(board.board)
+                group = print_board(board.board, board.score, board.moves)
             elif board.verify_end():
-                print("perdeu palhaço")
-                input()
+                group = print_board(board.board, board.score, board.moves, ended=True)
+                live.update(group, refresh=True)
+                click.getchar()
                 break
-
             live.update(group, refresh=True)
+
             
 
 def get_click():
-    import click
-    key = click.getchar()
 
-    if key in ("\x1b[B", "s", "S"):
-        return "down"
-    elif key in ("\x1b[A", "w", "W"):
-        return "up"
-    elif key in ("\x1b[D", "a", "A"):
-        return "left"
-    elif key in ("\x1b[C", "d", "D"):
-        return "right"
-    else:
-        return None
+    match click.getchar():
+        case "\x1b[B" | "s" | "S":
+            return "down"
+        case "\x1b[A" | "w" | "W":
+            return "up"
+        case "\x1b[D" | "a" | "A":
+            return "left"
+        case "\x1b[C" | "d" | "D":
+            return "right"
+        case _:
+            return None
 
-def print_board(board) -> Group:
-    menu = Text(justify="left")
+
+
+def print_board(board, score, moves, ended=False) -> Group:
+    menu = Text()
     menu.append(Text(" ╭──────┬──────┬──────┬──────╮\n"))
     for i in range(4):
         for j in range(4):
@@ -92,12 +93,17 @@ def print_board(board) -> Group:
             menu.append(Text(" ╰──────┴──────┴──────┴──────╯\n"))
 
 
-    panel = Panel.fit(menu)
+    score_panel = Text(f"\n Moves: {moves} | Score: {score}", justify="center")
+
+    if ended:
+        score_panel.append(Text("\nYou lose! Press any key to continue", justify="center"))
 
     group = Group(
         Rule("2048"),
+        Align(score_panel, "center"),
         Align(menu, "center"),
     )
+
     return group
 
 new_game()
