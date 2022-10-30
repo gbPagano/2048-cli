@@ -1,3 +1,4 @@
+from re import S
 import click
 
 from rich.align import Align
@@ -50,41 +51,45 @@ def get_click():
 
 def print_board(board) -> Group:
     menu = Text(justify="left")
-
     menu.append(Text(" ╭──────┬──────┬──────┬──────╮\n"))
     for i in range(4):
         for j in range(4):
-            if not board[i][j] == 0:
-                if board[i][j] < 10:
-                    if j == 0:
-                        menu.append(Text(f" │   {board[i][j]}  │ ", end=""))
-                    else:
-                        menu.append(Text(f"  {board[i][j]}  │ ", end=""))
-                elif board[i][j] < 100:
-                    if j == 0:
-                        menu.append(Text(f" │  {board[i][j]}  │ ", end=""))
-                    else:
-                        menu.append(Text(f" {board[i][j]}  │ ", end=""))
-                elif board[i][j] < 1000:
-                    if j == 0:
-                        menu.append(Text(f" │  {board[i][j]} │ ", end=""))
-                    else:
-                        menu.append(Text(f" {board[i][j]} │ ", end=""))
+            piece = board[i][j]
+        
+            match piece:
+                case 2 | 4:
+                    color = ""
+                case 8 | 16:
+                    color = "bright_yellow"
+                case 32 | 64:
+                    color = "orange1"
+                case 128 | 256:
+                    color = "dark_orange"
+                case 512 | 1024:
+                    color = "orange_red1"
+                case 2048:
+                    color = "red"
+                case _:
+                    color = "dark_red"
+
+            if j == 0:
+                menu.append(Text(f" │ ", end=""))
+            if piece:
+                if piece < 10:
+                    menu.append(Text.assemble(("  "),(f"{piece}", color),("  │ ")))
+                elif piece < 100:
+                    menu.append(Text.assemble((" "),(f"{piece}", color),("  │ ")))
+                elif piece < 1000:
+                    menu.append(Text.assemble((" "),(f"{piece}", color),(" │ ")))
                 else:
-                    if j == 0:
-                        menu.append(Text(f" │ {board[i][j]} │ ", end=""))
-                    else:
-                        menu.append(Text(f"{board[i][j]} │ ", end=""))
+                    menu.append(Text.assemble((f"{piece}", color),(" │ ")))
             else:
-                if j == 0:
-                    menu.append(Text(f" │      │ ", end=""))
-                else:
-                    menu.append(Text(f"     │ ", end=""))
-        menu.append(Text('\n'))
-        if i == 3:
-            menu.append(Text(" ╰──────┴──────┴──────┴──────╯\n"))
-        else:
+                menu.append(Text(f"     │ ", end=""))
+        menu.append(Text("\n"))
+        if i < 3:
             menu.append(Text(" ├──────┼──────┼──────┼──────┤\n"))
+        else:
+            menu.append(Text(" ╰──────┴──────┴──────┴──────╯\n"))
 
 
     panel = Panel.fit(menu)
