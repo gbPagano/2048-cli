@@ -6,6 +6,7 @@ from rich.live import Live
 from rich.panel import Panel
 from rich.rule import Rule
 from rich.text import Text
+from rich.layout import Layout
 
 from src.board import Board
 
@@ -93,17 +94,45 @@ def print_board(board, score, moves, ended=False) -> Group:
             menu.append(Text(" ╰──────┴──────┴──────┴──────╯\n"))
 
 
-    score_panel = Text(f"\n Moves: {moves} | Score: {score}", justify="center")
+    # score_panel = Text(f"\n Moves: {moves} | Score: {score}", justify="center")
 
+    # if ended:
+        # score_panel.append(Text("\nYou lose! Press any key to continue", justify="center"))
+
+    layout = Layout()
+    layout.split_column(
+        Layout(Rule("2048"), size=1),
+        Layout(name="score", size=2),
+        Layout(Align(menu, "center"), size=9)
+    )
+    layout["score"].split_row(
+        Layout(Text(f"\nMoves: {moves}", justify="right")),
+        Layout(Text("\n|", justify="center"),size=3),
+        Layout(Text(f"\nScore: {score}", justify="left")),
+    )
     if ended:
-        score_panel.append(Text("\nYou lose! Press any key to continue", justify="center"))
+        layout.add_split(
+            Layout(Text("You lose! Press any key to continue", justify="center")),
+        )
+    # if ended:
+    #     layout["score"].size = 4
+    #     layout["score"].split_column(
+    #         Layout(name="upper"),
+    #         Layout(Text("You lose! Press any key to continue", justify="center", end="")),
+    #     )
+    #     layout["upper"].split_row(
+    #         Layout(Text(f"\nMoves: {moves}", justify="right")),
+    #         Layout(Text("\n|", justify="center"),size=3),
+    #         Layout(Text(f"\nScore: {score}", justify="left")),
+    #     )
 
     group = Group(
         Rule("2048"),
-        Align(score_panel, "center"),
+        # Align(score_panel, "center"),
+        layout,
         Align(menu, "center"),
     )
 
-    return group
+    return layout
 
 new_game()
