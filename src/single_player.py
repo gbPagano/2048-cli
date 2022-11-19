@@ -1,63 +1,49 @@
-import click
+from time import sleep
 
+import click
 from rich.align import Align
-from rich.console import Group
+from rich.layout import Layout
 from rich.live import Live
-from rich.panel import Panel
 from rich.rule import Rule
 from rich.text import Text
-from rich.layout import Layout
 
 from src.board import Board
+from src.utils import get_click
 
-def new_game():
+
+def new_single_game() -> None:
     board = Board()
 
-    group = print_board(board.board, board.score, board.moves)
+    layout = print_board(board.board, board.score, board.moves)
 
-
-    with Live(group, auto_refresh=False, screen=True) as live:
-        live.update(group, refresh=True)
+    with Live(layout, auto_refresh=False, screen=True) as live:
+        live.update(layout, refresh=True)
         while True:
-            ...
-            import random
-            jogada = random.choice(["up", "down","right", "left"])
-            # jogada = get_click()
+
+            import random  # retirar
+
+            jogada = random.choice(["up", "down", "right", "left"])  # retirar
+            jogada = get_click()
             if jogada and board.move(jogada):
                 board.new_piece()
-                group = print_board(board.board, board.score, board.moves)
+                layout = print_board(board.board, board.score, board.moves)
             elif board.verify_end():
-                group = print_board(board.board, board.score, board.moves, ended=True)
-                live.update(group, refresh=True)
+                layout = print_board(board.board, board.score, board.moves, ended=True)
+                live.update(layout, refresh=True)
+                sleep(0.5)
                 click.getchar()
                 break
-            live.update(group, refresh=True)
 
-            
-
-def get_click():
-
-    match click.getchar():
-        case "\x1b[B" | "s" | "S":
-            return "down"
-        case "\x1b[A" | "w" | "W":
-            return "up"
-        case "\x1b[D" | "a" | "A":
-            return "left"
-        case "\x1b[C" | "d" | "D":
-            return "right"
-        case _:
-            return None
+            live.update(layout, refresh=True)
 
 
-
-def print_board(board, score, moves, ended=False) -> Group:
+def print_board(board: Board, score: int, moves: int, ended=False) -> Layout:
     menu = Text()
     menu.append(Text(" ╭──────┬──────┬──────┬──────╮\n"))
     for i in range(4):
         for j in range(4):
             piece = board[i][j]
-        
+
             match piece:
                 case 2 | 4:
                     color = ""
@@ -78,13 +64,13 @@ def print_board(board, score, moves, ended=False) -> Group:
                 menu.append(Text(f" │ ", end=""))
             if piece:
                 if piece < 10:
-                    menu.append(Text.assemble(("  "),(f"{piece}", color),("  │ ")))
+                    menu.append(Text.assemble(("  "), (f"{piece}", color), ("  │ ")))
                 elif piece < 100:
-                    menu.append(Text.assemble((" "),(f"{piece}", color),("  │ ")))
+                    menu.append(Text.assemble((" "), (f"{piece}", color), ("  │ ")))
                 elif piece < 1000:
-                    menu.append(Text.assemble((" "),(f"{piece}", color),(" │ ")))
+                    menu.append(Text.assemble((" "), (f"{piece}", color), (" │ ")))
                 else:
-                    menu.append(Text.assemble((f"{piece}", color),(" │ ")))
+                    menu.append(Text.assemble((f"{piece}", color), (" │ ")))
             else:
                 menu.append(Text(f"     │ ", end=""))
         menu.append(Text("\n"))
@@ -93,46 +79,24 @@ def print_board(board, score, moves, ended=False) -> Group:
         else:
             menu.append(Text(" ╰──────┴──────┴──────┴──────╯\n"))
 
-
-    # score_panel = Text(f"\n Moves: {moves} | Score: {score}", justify="center")
-
-    # if ended:
-        # score_panel.append(Text("\nYou lose! Press any key to continue", justify="center"))
-
     layout = Layout()
     layout.split_column(
         Layout(Rule("2048"), size=1),
         Layout(name="score", size=2),
-        Layout(Align(menu, "center"), size=9)
+        Layout(Align(menu, "center"), size=9),
     )
     layout["score"].split_row(
         Layout(Text(f"\nMoves: {moves}", justify="right")),
-        Layout(Text("\n|", justify="center"),size=3),
+        Layout(Text("\n|", justify="center"), size=3),
         Layout(Text(f"\nScore: {score}", justify="left")),
     )
     if ended:
         layout.add_split(
             Layout(Text("You lose! Press any key to continue", justify="center")),
         )
-    # if ended:
-    #     layout["score"].size = 4
-    #     layout["score"].split_column(
-    #         Layout(name="upper"),
-    #         Layout(Text("You lose! Press any key to continue", justify="center", end="")),
-    #     )
-    #     layout["upper"].split_row(
-    #         Layout(Text(f"\nMoves: {moves}", justify="right")),
-    #         Layout(Text("\n|", justify="center"),size=3),
-    #         Layout(Text(f"\nScore: {score}", justify="left")),
-    #     )
-
-    group = Group(
-        Rule("2048"),
-        # Align(score_panel, "center"),
-        layout,
-        Align(menu, "center"),
-    )
 
     return layout
 
-new_game()
+
+if __name__ == "__main__":
+    new_single_game()
