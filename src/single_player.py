@@ -19,10 +19,6 @@ def new_single_game() -> None:
     with Live(layout, auto_refresh=False, screen=True) as live:
         live.update(layout, refresh=True)
         while True:
-
-            import random  # retirar
-
-            jogada = random.choice(["up", "down", "right", "left"])  # retirar
             jogada = get_click()
             if jogada and board.move(jogada):
                 board.new_piece()
@@ -30,7 +26,8 @@ def new_single_game() -> None:
             elif board.verify_end():
                 layout = print_board(board.board, board.score, board.moves, ended=True)
                 live.update(layout, refresh=True)
-                sleep(0.5)
+                sleep(0.8)
+                live.update(layout, refresh=True)
                 click.getchar()
                 break
 
