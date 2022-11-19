@@ -10,7 +10,7 @@ Projeto em desenvolvimento, modo "AI Playing" ainda não foi implementado.
 ```bash
 $ git clone https://github.com/gbPagano/2048-game-for-terminal
 $ cd 2048-game-for-terminal
-$ poetry install
+$ pip install .
 ```
 ### Executando o jogo
 
