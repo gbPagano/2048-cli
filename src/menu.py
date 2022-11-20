@@ -21,7 +21,6 @@ def index_menu() -> int:
 
             index = update_index(index, key, 3)
             group = gen_index_menu(index)
-
             live.update(group, refresh=True)
 
 
