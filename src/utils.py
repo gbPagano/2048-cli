@@ -1,3 +1,6 @@
+from multiprocessing import Pool
+from os import cpu_count
+
 import click
 from rich.align import Align
 from rich.layout import Layout
@@ -5,6 +8,7 @@ from rich.rule import Rule
 from rich.text import Text
 
 from src.board import Board
+
 
 def get_click() -> str | None:
     match click.getchar():
@@ -83,3 +87,8 @@ def print_board(board: Board, score: int, moves: int, ended=False) -> Layout:
         )
 
     return layout
+
+
+def make_processes_pool() -> Pool:
+    pool = Pool(processes=cpu_count())
+    return pool

@@ -5,7 +5,7 @@
 ###############################################################################
 
 run: ## Executa o código main
-	@python src/ai_playing/montecarlo.py
+	@python src/main.py
 
 
 create_venv: ## Cria e ativa um novo ambiente virtual

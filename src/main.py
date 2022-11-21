@@ -1,4 +1,4 @@
-from src.ai_playing import montecarlo
+from src.ai_playing import new_ai_game
 from src.menu import index_menu
 from src.single_player import new_single_game
 
@@ -9,7 +9,7 @@ def start() -> None:
         if choice == 0:
             new_single_game()
         elif choice == 1:
-            montecarlo()
+            new_ai_game()
         else:
             break
 
