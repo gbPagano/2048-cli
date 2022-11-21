@@ -21,7 +21,6 @@ def index_menu() -> int:
 
             index = update_index(index, key, 3)
             group = gen_index_menu(index)
-
             live.update(group, refresh=True)
 
 
@@ -48,7 +47,7 @@ def gen_index_menu(index: int = 0) -> Group:
     options[index] = selected
 
     menu.append(Text.assemble(options[0], "Single Player\n"))
-    menu.append(Text.assemble(options[1], ("AI Playing\n", "yellow")))
+    menu.append(Text.assemble(options[1], "AI Playing\n"))
     menu.append(Text.assemble(options[2], "Exit"))
 
     panel = Panel.fit(menu)
