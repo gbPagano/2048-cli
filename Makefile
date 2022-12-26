@@ -20,7 +20,8 @@ venv: ## Ativa o ambiente virtual
 
 install: ## Instala as dependências do projeto com o Poetry
 	@poetry install
-	@maturin develop --release
+	@maturin build --release -o packages
+	@pip install packages/*.whl
 
 
 
