@@ -2,8 +2,6 @@ from time import sleep
 
 import click
 from rich.live import Live
-from rich.rule import Rule
-from rich.text import Text
 
 from src.board import Board
 from src.utils import get_click, print_board

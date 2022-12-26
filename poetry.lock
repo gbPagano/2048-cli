@@ -53,7 +53,7 @@ optional = false
 python-versions = ">=3.6.0"
 
 [package.extras]
-unicode_backport = ["unicodedata2"]
+unicode-backport = ["unicodedata2"]
 
 [[package]]
 name = "click"
@@ -148,9 +148,9 @@ python-versions = ">=3.6.1,<4.0"
 
 [package.extras]
 colors = ["colorama (>=0.4.3,<0.5.0)"]
-pipfile_deprecated_finder = ["pipreqs", "requirementslib"]
+pipfile-deprecated-finder = ["pipreqs", "requirementslib"]
 plugins = ["setuptools"]
-requirements_deprecated_finder = ["pip-api", "pipreqs"]
+requirements-deprecated-finder = ["pip-api", "pipreqs"]
 
 [[package]]
 name = "lockfile"
@@ -159,6 +159,21 @@ description = "Platform-independent file locking module"
 category = "dev"
 optional = false
 python-versions = "*"
+
+[[package]]
+name = "maturin"
+version = "0.14.7"
+description = "Build and publish crates with pyo3, rust-cpython and cffi bindings as well as rust binaries as python packages"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+tomli = {version = ">=1.1.0", markers = "python_version < \"3.11\""}
+
+[package.extras]
+patchelf = ["patchelf"]
+zig = ["ziglang (>=0.10.0,<0.11.0)"]
 
 [[package]]
 name = "mccabe"
@@ -361,7 +376,7 @@ urllib3 = ">=1.21.1,<1.27"
 
 [package.extras]
 socks = ["PySocks (>=1.5.6,!=1.5.7)"]
-use_chardet_on_py3 = ["chardet (>=3.0.2,<6)"]
+use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
 name = "resolvelib"
@@ -399,6 +414,18 @@ description = "An extremely fast Python linter, written in Rust."
 category = "dev"
 optional = false
 python-versions = ">=3.7"
+
+[[package]]
+name = "rust-montecarlo"
+version = "0.1.0"
+description = ""
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.source]
+type = "file"
+url = "packages/rust_montecarlo-0.1.0-cp310-cp310-manylinux_2_34_x86_64.whl"
 
 [[package]]
 name = "setuptools"
@@ -449,7 +476,7 @@ python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.7"
 
@@ -477,7 +504,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "8fca7d37c04c88f4df9678df09c657a7624b89ef9fd2c199ff0999b5099959d5"
+content-hash = "79712916e863294e506460ea3a93ec731fedcefc179726b7066c22e2cc5b2de9"
 
 [metadata.files]
 black = [
@@ -552,6 +579,21 @@ isort = [
 lockfile = [
     {file = "lockfile-0.12.2-py2.py3-none-any.whl", hash = "sha256:6c3cb24f344923d30b2785d5ad75182c8ea7ac1b6171b08657258ec7429d50fa"},
     {file = "lockfile-0.12.2.tar.gz", hash = "sha256:6aed02de03cba24efabcd600b30540140634fc06cfa603822d508d5361e9f799"},
+]
+maturin = [
+    {file = "maturin-0.14.7-py3-none-linux_armv6l.whl", hash = "sha256:6c8fbbe4ddc41ca6a6cbc994e51d920dc907d20e3676b3403485f07945c4067a"},
+    {file = "maturin-0.14.7-py3-none-macosx_10_7_x86_64.whl", hash = "sha256:dbdafb191475cfe3c29789deeb5330923dae4e620776e8b84fe7fa2fc5da3047"},
+    {file = "maturin-0.14.7-py3-none-macosx_10_9_x86_64.macosx_10_9_arm64.macosx_10_9_universal2.whl", hash = "sha256:8f4602fa53f606ed39e33f0150e4d2c13ce1d75161bda31f1783c62d49f5df7d"},
+    {file = "maturin-0.14.7-py3-none-manylinux_2_12_i686.manylinux2010_i686.musllinux_1_1_i686.whl", hash = "sha256:799d582f25ac2fce6a2aedf28ac34e7872ddafa8f995dfae73d7f9906754269d"},
+    {file = "maturin-0.14.7-py3-none-manylinux_2_12_x86_64.manylinux2010_x86_64.musllinux_1_1_x86_64.whl", hash = "sha256:6bb39a7e696d0a916eeadb5c6bce087e1b759fb528e180a894875669d3b86bd4"},
+    {file = "maturin-0.14.7-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.musllinux_1_1_aarch64.whl", hash = "sha256:cc90a505c359e5cb3c7b69582b0cda2a2d67943b34188537b487c9425fd5cf86"},
+    {file = "maturin-0.14.7-py3-none-manylinux_2_17_armv7l.manylinux2014_armv7l.musllinux_1_1_armv7l.whl", hash = "sha256:ee04493dda88b4eda2334238a1981ecbb517c820807b3f8c3d58832bf58a4e9f"},
+    {file = "maturin-0.14.7-py3-none-manylinux_2_17_ppc64le.manylinux2014_ppc64le.musllinux_1_1_ppc64le.whl", hash = "sha256:74c547b936c074d4fb555087d0910422f86fdfafe2ec953d3ed308ef7b0d1844"},
+    {file = "maturin-0.14.7-py3-none-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:5ae45fca0618ea29c177aa3c3d3c6a88f6676e2d69c24e82e7a31372cf2a2ee6"},
+    {file = "maturin-0.14.7-py3-none-win32.whl", hash = "sha256:4f5aa10540a1aeffd61552e567f9967572e9070e869d5110e0f3d5f3f7f90b1a"},
+    {file = "maturin-0.14.7-py3-none-win_amd64.whl", hash = "sha256:274913158beff0a7028f235c881eb4521fa38e7547feea957d6e6a5dfe6930cd"},
+    {file = "maturin-0.14.7-py3-none-win_arm64.whl", hash = "sha256:a33a61d64161bf4ab75b32a6054e4c786779cad1370bd44c6e28e4857029390a"},
+    {file = "maturin-0.14.7.tar.gz", hash = "sha256:87a8f894e828d64bfba34c507e11da7fb50ade7de46959685d7e4ca3251c443f"},
 ]
 mccabe = [
     {file = "mccabe-0.7.0-py2.py3-none-any.whl", hash = "sha256:6c2d30ab6be0e4a46919781807b4f0d834ebdd6c6e3dca0bda5a15f863427b6e"},
@@ -726,6 +768,9 @@ ruff = [
     {file = "ruff-0.0.127-py3-none-win32.whl", hash = "sha256:664667e87b13b69ed5f3a2d38c490195d9698de1a34f23b7dfdeb5668d1ba255"},
     {file = "ruff-0.0.127-py3-none-win_amd64.whl", hash = "sha256:4b684fc300c86186a6ebdd282f7e6ad06d4916bf4ae33497fe31cf14cc6cc011"},
     {file = "ruff-0.0.127.tar.gz", hash = "sha256:27f0f52a478a7139c5dae31e0b3190ac3e7b5cdd0f867f16bb998cf8ed656643"},
+]
+rust-montecarlo = [
+    {file = "rust_montecarlo-0.1.0-cp310-cp310-manylinux_2_34_x86_64.whl", hash = "sha256:69dd6bd21a2aace3e60a1d0e40bb41b41b69983c56022c1eefee0406123653fe"},
 ]
 setuptools = [
     {file = "setuptools-65.5.1-py3-none-any.whl", hash = "sha256:d0b9a8433464d5800cbe05094acf5c6d52a91bfac9b52bcfc4d41382be5d5d31"},
