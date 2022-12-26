@@ -4,6 +4,7 @@
 # COMMANDS                                                                    #
 ###############################################################################
 
+
 run: ## Executa o código main
 	@python src/main.py
 
@@ -17,8 +18,9 @@ venv: ## Ativa o ambiente virtual
 	@source ./.venv/bin/activate
 
 
-requirements: ## Instala as dependências do projeto com o Poetry
+install: ## Instala as dependências do projeto com o Poetry
 	@poetry install
+	@maturin develop --release
 
 
 
