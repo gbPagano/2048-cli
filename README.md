@@ -10,14 +10,10 @@ Projeto em desenvolvimento, modo "AI Playing" ainda não foi implementado.
 ```bash
 $ git clone https://github.com/gbPagano/2048-game-for-terminal
 $ cd 2048-game-for-terminal
-$ pip install .
+$ make install
 ```
 ### Executando o jogo
 
-```bash
-$ python src/main.py
-```
-Ou
 ```bash
 $ make run
 ```
