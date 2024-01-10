@@ -15,7 +15,6 @@ def new_ai_game() -> None:
     with Live(layout, auto_refresh=False, screen=True) as live:
         live.update(layout, refresh=True)
         while True:
-
             iterations = 10 + board.moves
             depth = 5
 
@@ -43,7 +42,6 @@ def benchmark() -> None:
 
     print(board.board, board.score, board.moves)
     while True:
-
         if board.moves == 2500:
             break
 

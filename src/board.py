@@ -31,7 +31,6 @@ class Board:
                 self.board[i][j] = 2
 
     def move(self, direction: str) -> bool:
-
         if direction == "down":
             self.board = np.flip(self.board)
             self.board = np.rot90(self.board)
@@ -103,7 +102,6 @@ class Board:
         return True
 
     def _moving(self) -> bool:
-
         self.has_moved = False
         self._push()
         if self._sum():
