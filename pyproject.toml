@@ -9,9 +9,10 @@ packages = [{include = "src"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 numpy = "^1.23.3"
-rich = "^12.5.1"
 click = "^8.1.3"
 maturin = "^0.14.7"
+rich = "^13.7.0"
+rich-menu = "^0.1.4"
 
 [tool.poetry.group.dev.dependencies]
 pip-audit = "^2.4.5"
@@ -28,3 +29,5 @@ build-backend = "poetry.core.masonry.api"
 [tool.taskipy.tasks]
 run = "python src/main.py"
 format = "isort src && ruff format src"
+install = "poetry install && maturin build --release -o packages && pip install packages/*.whl --force-reinstall"
+benchmark = "python src/ai_playing/benchmark.py"

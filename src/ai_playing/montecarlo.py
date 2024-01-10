@@ -37,32 +37,5 @@ def new_ai_game() -> None:
             live.update(layout, refresh=True)
 
 
-def benchmark() -> None:
-    board = Board()
-
-    print(board.board, board.score, board.moves)
-    while True:
-        if board.moves == 2500:
-            break
-
-        iterations = 10 + board.moves
-        depth = 5
-
-        if board.moves > 900:
-            iterations = board.moves
-            depth = board.moves // 100
-
-        direction_move = montecarlo(board.board, iterations, depth)
-        if direction_move and board.move(direction_move):
-            board.new_piece()
-            print("-----------------")
-            print(board.board, board.score, board.moves)
-        elif board.verify_end():
-            print("-----------------")
-            print(board.board, board.score, board.moves)
-            break
-
-
 if __name__ == "__main__":
-    benchmark()
-    # new_ai_game()
+    new_ai_game()
