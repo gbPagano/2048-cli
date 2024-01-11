@@ -54,7 +54,7 @@ def montecarlo_benchmark(n, m, terminable):
 
 if __name__ == "__main__":
     print("Montecarlo Time Benchmark")
-    montecarlo_benchmark(3, 2500, False)
+    montecarlo_benchmark(5, 2500, False)
     print("--------")
     print("Montecarlo Score Benchmark")
     montecarlo_benchmark(10, 50000, True)
