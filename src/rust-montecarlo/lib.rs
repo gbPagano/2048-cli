@@ -5,7 +5,6 @@ use pyo3::prelude::*;
 use rand::prelude::SliceRandom;
 use rayon::prelude::*;
 use std::collections::HashMap;
-use std::sync::mpsc::channel;
 
 /// A Python module implemented in Rust.
 #[pymodule]
@@ -20,7 +19,6 @@ fn montecarlo(board: [[i32; 4]; 4], iterations: i32, depth: i32) -> PyResult<Str
     let directions = ["up", "down", "right", "left"];
 
     for (key, value) in results.iter_mut() {
-
         *value = (0..iterations)
             .into_par_iter()
             .map(|_| {
@@ -39,7 +37,7 @@ fn montecarlo(board: [[i32; 4]; 4], iterations: i32, depth: i32) -> PyResult<Str
                     }
                     cp_board.new_piece();
                 }
-                cp_board.score 
+                cp_board.score
             })
             .sum();
     }
