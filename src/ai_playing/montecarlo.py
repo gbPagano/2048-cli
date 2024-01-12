@@ -16,11 +16,7 @@ def new_ai_game() -> None:
         live.update(layout, refresh=True)
         while True:
             iterations = 10 + board.moves
-            depth = 5
-
-            if board.moves > 900:
-                iterations = board.moves
-                depth = board.moves // 100
+            depth = 5 + board.moves // 100
 
             direction_move = montecarlo(board.board, iterations, depth)
             if direction_move and board.move(direction_move):

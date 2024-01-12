@@ -28,46 +28,20 @@ fn montecarlo(board: [[i32; 4]; 4], iterations: i32, depth: i32) -> PyResult<Str
                 cp_board.score = 0;
                 cp_board.board = board;
                 if !cp_board.movement(key) {
-                    return cp_board.score;
+                    return -1; // impossimple
                 }
                 cp_board.new_piece();
                 for _ in 0..depth {
                     while !cp_board.movement(directions.choose(&mut rand::thread_rng()).unwrap()) {
                         if cp_board.verify_end() {
-                            return cp_board.score;
+                            return cp_board.score / 64; // loses
                         }
                     }
                     cp_board.new_piece();
                 }
-                cp_board.score
+                cp_board.score 
             })
             .sum();
-
-
-        // let (sender, receiver) = channel();
-        // (0..iterations)
-        //     .into_par_iter()
-        //     .for_each_with(sender, |s, _| {
-        //         let mut cp_board = Board::new();
-        //         cp_board.score = 0;
-        //         cp_board.board = board;
-        //         if cp_board.movement(key) {
-        //             cp_board.new_piece();
-        //         } else {
-        //             return;
-        //         }
-        //         for _ in 0..depth {
-        //             while !cp_board.movement(directions.choose(&mut rand::thread_rng()).unwrap()) {
-        //                 if cp_board.verify_end() {
-                            // s.send(cp_board.score).unwrap();
-        //                     return;
-        //                 }
-        //             }
-        //             cp_board.new_piece();
-        //         }
-        //         s.send(cp_board.score).unwrap();
-        //     });
-        // *value = receiver.iter().sum();
     }
     let best = results.iter().max_by_key(|entry| entry.1).unwrap();
     Ok(best.0.to_string())

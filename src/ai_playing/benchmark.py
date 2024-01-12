@@ -12,11 +12,7 @@ def montercarlo_newgame(moves, terminable=False) -> (bool, int, int):
             return True, board.score, board.moves
 
         iterations = 10 + board.moves
-        depth = 5
-
-        if board.moves > 900:
-            iterations = board.moves
-            depth = board.moves // 100
+        depth = 5 + board.moves // 100
 
         direction_move = montecarlo(board.board, iterations, depth)
         if direction_move and board.move(direction_move):
@@ -54,8 +50,8 @@ def montecarlo_benchmark(n, m, terminable):
 
 if __name__ == "__main__":
     print("Montecarlo Time Benchmark")
-    montecarlo_benchmark(5, 2500, False)
+    montecarlo_benchmark(20, 2500, False)
     print("--------")
     print("Montecarlo Score Benchmark")
-    montecarlo_benchmark(10, 50000, True)
+    montecarlo_benchmark(30, 50000, True)
     print("--------")
