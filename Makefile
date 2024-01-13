@@ -27,7 +27,7 @@ install: ## Instala as dependências do projeto com o Poetry
 
 format: ## Formata os arquivos .py do projeto, seguindo os padrões da PEP 8
 	@isort src
-	@black src
+	@ruff formar src
 
 
 lint: ## Realiza uma análise estática
