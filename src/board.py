@@ -111,31 +111,23 @@ class Board:
 
     def _push(self) -> None:
         for i in range(4):
-            for j in range(4):
+            for j in range(1, 4):
                 if self.board[i][j] != 0:
-                    if j > 0 and self.board[i][j - 1] == 0:
-                        self.board[i][j - 1], self.board[i][j] = (
-                            self.board[i][j],
+                    k = j
+                    while k > 0 and self.board[i][k - 1] == 0:
+                        self.board[i][k - 1], self.board[i][k] = (
+                            self.board[i][k],
                             0,
                         )
                         self.has_moved = True
-                        if j > 1 and self.board[i][j - 2] == 0:
-                            self.board[i][j - 2], self.board[i][j - 1] = (
-                                self.board[i][j - 1],
-                                0,
-                            )
-                            if j > 2 and self.board[i][j - 3] == 0:
-                                self.board[i][j - 3], self.board[i][j - 2] = (
-                                    self.board[i][j - 2],
-                                    0,
-                                )
+                        k -= 1
 
     def _sum(self) -> bool:
         result = False
         for i in range(4):
-            for j in range(4):
+            for j in range(1, 4):
                 if self.board[i][j] != 0:
-                    if j > 0 and self.board[i][j - 1] == self.board[i][j]:
+                    if self.board[i][j - 1] == self.board[i][j]:
                         self.score += self.board[i][j] * 2
                         self.board[i][j - 1], self.board[i][j] = (
                             self.board[i][j] * 2,

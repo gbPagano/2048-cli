@@ -1,7 +1,7 @@
 from rich_menu import Menu
 
-from src.ai_playing import new_ai_game
-from src.single_player import new_single_game
+from src.ai_playing.montecarlo import MonteCarlo
+from src.game import Game
 
 
 def main() -> None:
@@ -14,9 +14,9 @@ def main() -> None:
     while True:
         match menu.ask():
             case "Single Player":
-                new_single_game()
+                Game().run()
             case "AI Playing":
-                new_ai_game()
+                MonteCarlo().run()
             case "Exit":
                 exit()
 
