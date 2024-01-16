@@ -1,4 +1,4 @@
-from rust_montecarlo import montecarlo
+from src.rust_montecarlo import montecarlo
 
 from src.game import Game
 

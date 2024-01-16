@@ -10,7 +10,7 @@ path = "src/rust-montecarlo/lib.rs"
 crate-type = ["cdylib"]
 
 [dependencies]
-pyo3 = { version = "0.17.3", features = ["extension-module"] }
+pyo3 = { version = "0.20.0", features = ["extension-module", "generate-import-lib"] }
 rand = "0.8.5"
 rayon = "1.6.1"
 

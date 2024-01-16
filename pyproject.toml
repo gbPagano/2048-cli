@@ -1,18 +1,31 @@
 [tool.poetry]
 name = "2048_cli"
-version = "0.3.0"
+version = "0.0.2"
 description = ""
 authors = ["gbPagano <guilhermebpagano@gmail.com>"]
 readme = "README.md"
-packages = [{include = "src"}]
+
+[project]
+name = "2048-cli"
+version = "0.0.2"
+description = ""
+authors = [ {name = "gbPagano", email = "guilhermebpagano@gmail.com"} ]
+readme = "README.md"
+requires-python = ">=3.10"
+
+[tool.maturin]
+module-name = "src.rust_montecarlo"
+
+[project.scripts]
+2048 = "src.main:main"
 
 [tool.poetry.dependencies]
 python = "^3.10"
 numpy = "^1.23.3"
 click = "^8.1.3"
-maturin = "^0.14.7"
 rich = "^13.7.0"
 rich-menu = "^0.1.4"
+maturin = "^1.4.0"
 
 [tool.poetry.group.dev.dependencies]
 pip-audit = "^2.4.5"
@@ -22,12 +35,12 @@ isort = "^5.13.2"
 taskipy = "^1.12.2"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["maturin>=1.0,<2.0"]
+build-backend = "maturin"
 
 
 [tool.taskipy.tasks]
 run = "python src/main.py"
 format = "isort src && ruff format src"
-install = "poetry install && maturin build --release -o packages && pip install packages/*.whl --force-reinstall"
+install = "maturin develop --release"
 benchmark = "python src/ai_playing/benchmark.py"
