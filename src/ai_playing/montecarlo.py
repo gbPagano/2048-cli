@@ -1,6 +1,5 @@
-from src.rust_montecarlo import montecarlo
-
 from src.game import Game
+from src.rust_montecarlo import montecarlo
 
 
 class MonteCarlo(Game):

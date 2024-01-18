@@ -7,23 +7,30 @@ The game ends when the grid is full and there are no more combinations available
 In this project, I also try to develop an A.I. using the Monte Carlo method to try to achieve the best possible score.
 
 ## Installation
+Install with pip or your favorite PyPI package manager
 ```bash
-$ git clone https://github.com/gbPagano/2048-game-for-terminal
-$ poetry install
-$ task install
+$ pipx install 2048-cli
 ```
-
+Then run the following command in the terminal
 ```bash
-$ task run
+$ 2048-cli
 ```
 
 ## Modes
 ### Single Player
 In single player mode, you command the moves with the aim of achieving the highest possible score.
 
-#### photos (to do)
+<div align="center">
+
+![menu](./assets/menu.png)
+
+</div>
 
 ### AI Playing
 In AI game mode, moves will be generated using a Monte Carlo search algorithm.
 
-#### photos (to do)
+<div align="center">
+
+![montecarlo](./assets/montecarlo.png)
+
+</div>
