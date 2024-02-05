@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "2048_cli"
-version = "1.0.0"
+version = "1.0.1"
 description = "A small clone of 2048 for terminal, and also the implementation of an A.I. for it"
 authors = ["gbPagano <guilhermebpagano@gmail.com>"]
 readme = "README.md"
 
 [project]
 name = "2048-cli"
-version = "1.0.0"
+version = "1.0.1"
 description = "A small clone of 2048 for terminal, and also the implementation of an A.I. for it"
 authors = [ {name = "gbPagano", email = "guilhermebpagano@gmail.com"} ]
 readme = "README.md"
