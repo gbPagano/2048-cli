@@ -9,7 +9,7 @@ def main() -> None:
         "Single Player",
         "AI Playing",
         "Exit",
-        rule_title="2048",
+        title="2048",
     )
     while True:
         match menu.ask():
